@@ -1,0 +1,21 @@
+{
+  "name": "@lumina-engine/store",
+  "version": "0.0.0",
+  "type": "module",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.d.ts"
+    }
+  },
+  "files": [
+    "index.d.ts"
+  ]
+}

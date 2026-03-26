@@ -1,0 +1,12 @@
+{
+  "name": "lumina-engine-packages",
+  "private": true,
+  "version": "0.0.0",
+  "workspaces": [
+    "@lumina-engine/*"
+  ],
+  "scripts": {
+    "build": "node ../plugins/dist-types.ts",
+    "publish": "npm publish --workspaces --access public"
+  }
+}
