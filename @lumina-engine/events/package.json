@@ -16,6 +16,9 @@
     }
   },
   "files": [
-    "index.d.ts"
+    "index.d.ts",
+    "__internal",
+    "events.d.ts",
+    "external-modules.d.ts"
   ]
 }

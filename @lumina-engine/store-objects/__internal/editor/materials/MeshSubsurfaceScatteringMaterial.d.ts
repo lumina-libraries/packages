@@ -1,0 +1,50 @@
+import { ShaderMaterial, Color, type MaterialParameters } from 'three';
+export interface MeshSubsurfaceScatteringMaterialParameters extends MaterialParameters {
+    map?: Texture;
+    diffuse?: Color;
+    shininess?: number;
+    thicknessMap?: Texture;
+    thicknessColor?: Color;
+    thicknessDistortion?: number;
+    thicknessAmbient?: number;
+    thicknessAttenuation?: number;
+    thicknessPower?: number;
+    thicknessScale?: number;
+}
+export declare class MeshSubsurfaceScatteringMaterial extends ShaderMaterial {
+    parameters: MeshSubsurfaceScatteringMaterialParameters;
+    type: 'MeshSubsurfaceScatteringMaterial';
+    _map: Texture | null;
+    _diffuse: Color;
+    _shininess: number;
+    _thicknessMap: Texture | null;
+    _thicknessColor: Color;
+    _thicknessDistortion: number;
+    _thicknessAmbient: number;
+    _thicknessAttenuation: number;
+    _thicknessPower: number;
+    _thicknessScale: number;
+    constructor(parameters?: MeshSubsurfaceScatteringMaterialParameters);
+    get map(): Texture | null;
+    set map(map: Texture | null);
+    get diffuse(): Color;
+    set diffuse(diffuse: Color);
+    get shininess(): number;
+    set shininess(shininess: number);
+    get thicknessMap(): Texture | null;
+    set thicknessMap(thicknessMap: Texture | null);
+    get thicknessColor(): Color;
+    set thicknessColor(thicknessColor: Color);
+    get thicknessDistortion(): number;
+    set thicknessDistortion(thicknessDistortion: number);
+    get thicknessAmbient(): number;
+    set thicknessAmbient(thicknessAmbient: number);
+    get thicknessAttenuation(): number;
+    set thicknessAttenuation(thicknessAttenuation: number);
+    get thicknessPower(): number;
+    set thicknessPower(thicknessPower: number);
+    get thicknessScale(): number;
+    set thicknessScale(thicknessScale: number);
+    set needsUpdate(value: boolean);
+    private updateMaterial;
+}

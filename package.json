@@ -6,7 +6,6 @@
     "@lumina-engine/*"
   ],
   "scripts": {
-    "build": "node ../plugins/dist-types.ts",
     "publish": "npm publish --workspaces --access public"
   }
 }
