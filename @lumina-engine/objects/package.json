@@ -15,9 +15,11 @@
       "default": "./index.d.ts"
     }
   },
+  "dependencies": {
+    "@lumina-engine/internal": "0.0.0"
+  },
   "files": [
     "index.d.ts",
-    "__internal",
     "events.d.ts",
     "external-modules.d.ts"
   ]
