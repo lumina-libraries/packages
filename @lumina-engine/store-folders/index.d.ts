@@ -1,4 +1,11 @@
-/// <reference path="./events.d.ts" />
-/// <reference path="./external-modules.d.ts" />
-export { StoreFolderAdapter, StoreFolderAdapter as default } from "@lumina-engine/internal/editor/core/adapters/engine/StoreFolderAdapter";
-export * from "@lumina-engine/internal/editor/core/adapters/engine/StoreFolderAdapter";
+export interface StoreFolderAdapter {
+  id: string;
+  name: string;
+  parentId?: string;
+  readonly children?: StoreFolderAdapter[];
+  readonly items?: unknown[];
+  [key: string]: unknown;
+}
+
+declare const defaultFolder: StoreFolderAdapter;
+export default defaultFolder;

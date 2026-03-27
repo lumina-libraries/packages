@@ -1,3 +1,3 @@
 # @lumina-engine/events
 
-Generated Lumina Engine plugin type package.
+Public logging event types for Lumina Engine plugins.

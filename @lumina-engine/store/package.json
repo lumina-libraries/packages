@@ -16,7 +16,8 @@
     }
   },
   "dependencies": {
-    "@lumina-engine/internal": "0.0.0"
+    "three": "*",
+    "@lumina-engine/objects": "0.0.0"
   },
   "files": [
     "index.d.ts",

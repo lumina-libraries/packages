@@ -1,3 +1,3 @@
 # @lumina-engine/store-objects
 
-Generated Lumina Engine plugin type package.
+Curated custom store object types for Lumina Engine plugins.

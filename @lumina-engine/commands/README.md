@@ -1,3 +1,3 @@
 # @lumina-engine/commands
 
-Generated Lumina Engine plugin type package.
+Minimal public command typings for Lumina Engine plugins.

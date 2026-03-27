@@ -16,7 +16,13 @@
     }
   },
   "dependencies": {
-    "@lumina-engine/internal": "0.0.0"
+    "three": "*",
+    "@lumina-engine/commands": "0.0.0",
+    "@lumina-engine/core": "0.0.0",
+    "@lumina-engine/objects": "0.0.0",
+    "@lumina-engine/store": "0.0.0",
+    "@lumina-engine/store-folders": "0.0.0",
+    "@lumina-engine/store-objects": "0.0.0"
   },
   "files": [
     "index.d.ts",

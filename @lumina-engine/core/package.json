@@ -15,9 +15,6 @@
       "default": "./index.d.ts"
     }
   },
-  "dependencies": {
-    "@lumina-engine/internal": "0.0.0"
-  },
   "files": [
     "index.d.ts",
     "events.d.ts",

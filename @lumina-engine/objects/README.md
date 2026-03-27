@@ -1,3 +1,3 @@
 # @lumina-engine/objects
 
-Generated Lumina Engine plugin type package.
+Curated custom object types for Lumina Engine plugins.

@@ -1,3 +1,3 @@
 # @lumina-engine/store-folders
 
-Generated Lumina Engine plugin type package.
+Minimal folder handle types for Lumina Engine plugins.

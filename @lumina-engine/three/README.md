@@ -1,3 +1,3 @@
 # @lumina-engine/three
 
-Generated Lumina Engine plugin type package.
+Re-exported Three.js types for Lumina Engine plugins.

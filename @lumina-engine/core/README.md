@@ -1,3 +1,3 @@
 # @lumina-engine/core
 
-Generated Lumina Engine plugin type package.
+Curated engine control types for Lumina Engine plugins.

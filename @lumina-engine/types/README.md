@@ -1,3 +1,3 @@
 # @lumina-engine/types
 
-Generated Lumina Engine plugin type package.
+Public plugin API types for Lumina Engine plugins.

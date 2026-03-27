@@ -1,4 +1,23 @@
-/// <reference path="./events.d.ts" />
-/// <reference path="./external-modules.d.ts" />
-export { DevlogEvent } from "@lumina-engine/internal/editor/application/events/DevlogEvent";
-export { LogFlag } from "@lumina-engine/internal/editor/shared/constants/log-flags";
+export enum LogFlag {
+  Info,
+  Warning,
+  Error,
+}
+
+export interface DevlogOptions {
+  id?: string;
+  content: unknown[];
+  flags?: LogFlag[];
+  date?: Date;
+  progress?: number | null;
+  [key: string]: unknown;
+}
+
+export declare class DevlogEvent extends CustomEvent<DevlogOptions> {
+  static type: string;
+  static contents: DevlogOptions["content"][];
+  static list: DevlogOptions[];
+  static flags: typeof LogFlag;
+  static dispatch(options: DevlogOptions): void;
+  constructor(options: DevlogOptions);
+}
