@@ -3,6 +3,7 @@ export interface StoreFolderAdapter {
   name: string;
   parentId?: string;
   readonly children?: StoreFolderAdapter[];
+  add(object: unknown): void;
   readonly items?: unknown[];
   [key: string]: unknown;
 }
