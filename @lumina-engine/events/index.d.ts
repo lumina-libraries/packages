@@ -48,6 +48,9 @@ export interface EditorEventMap {
   "customObject.keyboardInput": { type: "keydown" | "keyup"; data: CustomObjectKeyboardEventData; object: CustomObject3D };
   "devlog.logged": DevlogEntry;
   "selection.changed": Selection;
+  "selection.renameRequested": { object: Object3D };
+  "project.saveRequested": Record<string, never>;
+  "project.stateChanged": { dirty: boolean; saving: boolean; location: string | null; lastSavedAt: Date | null };
   "store.removeRequested": { object?: Object3D; material?: Material; geometry?: BufferGeometry; texture?: Texture; source?: Source<unknown>; animation?: AnimationClip; hierarchy?: boolean; [resource: string]: unknown };
   "import.requested": { object?: Object3D; material?: Material; texture?: Texture; animation?: AnimationClip; toCursor?: boolean; toCamera?: boolean; addTo?: Object3D; parent?: boolean; [resource: string]: unknown };
   "export.requested": { wavefront?: boolean; gltf?: boolean; zip?: boolean; fs?: boolean; nova?: boolean; asset?: boolean };
@@ -58,6 +61,7 @@ export interface EditorEventMap {
   "world.activeChanged": ActiveState;
   "playTest.requested": ActiveState;
   "playTest.changed": ActiveState;
+  "playTest.statusChanged": { phase: "idle" | "preparing" | "running" | "failed"; message?: string };
   "workplace.opened": { directory: unknown; default: boolean; createdAt: Date; sessionId?: string };
   "ui.refreshRequested": { section: "transform" | "material" | "texture" | "animation" | "folder" | "folders"; target: string };
   "contextMenu.changed": { active?: boolean; x?: number; y?: number; items?: unknown[]; [option: string]: unknown };
@@ -68,6 +72,8 @@ export interface EditorEventMap {
   "workbench.scriptTabRequested": { script: Object3D };
   "workbench.scriptTabCloseRequested": { scriptId: string };
   "workbench.voxelEditorRequested": { object: Object3D };
+  "workbench.tabRequested": { templateId: string };
+  "workbench.layoutResetRequested": Record<string, never>;
   "gridTool.modeChanged": { enabled: boolean };
   "gridTool.settingsRequested": { blockType: "ROOM" | "STAIRS" | "WALL" | "FLOOR"; rotation: 0 | 90 | 180 | 270; showConnectionPoints: boolean; mode: "Single" | "Line" | "Rectangle"; flip: boolean; showPreview: boolean; aboveSurface: boolean; onSurface: boolean; replaceBlocks: boolean; extrudeAmount: number };
   "gridTool.settingsChanged": { blockType: "ROOM" | "STAIRS" | "WALL" | "FLOOR"; rotation: 0 | 90 | 180 | 270; showConnectionPoints: boolean; mode: "Single" | "Line" | "Rectangle"; flip: boolean; showPreview: boolean; aboveSurface: boolean; onSurface: boolean; replaceBlocks: boolean; extrudeAmount: number };
@@ -86,7 +92,7 @@ export interface EditorEventMap {
   "collaboration.sessionShared": { sessionId: string };
   "collaboration.sessionJoined": { sessionId: string };
   "collaboration.joinDeclined": { sessionId: string };
-  "collaboration.sessionEnded": Record<string, never>;
+  "collaboration.sessionEnded": { reason?: string };
   "collaboration.localUserChanged": CollaborationUser;
   "collaboration.userJoined": CollaborationUser;
   "collaboration.userLeft": { id: string };
@@ -135,6 +141,6 @@ export interface EditorEvents {
   emit<Payload>(name: EventName<Payload>, payload: NoInfer<Payload>): void;
   on<Payload>(name: EventName<Payload>, listener: (payload: Payload) => void | Promise<void>): () => void;
   once<Payload>(name: EventName<Payload>, listener: (payload: Payload) => void | Promise<void>): () => void;
-  /** Latest payload of a state event: selection.changed, transform.toolChanged, world.activeChanged, playTest.changed, workbench.focusChanged. */
+  /** Latest payload of a state event: selection.changed, transform.toolChanged, world.activeChanged, playTest.changed, playTest.statusChanged, project.stateChanged, workbench.focusChanged. */
   latest<Payload>(name: EventName<Payload>): Payload | undefined;
 }
