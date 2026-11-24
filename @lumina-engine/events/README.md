@@ -1,3 +1,3 @@
 # @lumina-engine/events
 
-Public logging event types for Lumina Engine plugins.
+The typed editor event registry (EDITOR_EVENTS) and payload types for Lumina Engine plugins.

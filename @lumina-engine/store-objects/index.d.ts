@@ -10,7 +10,7 @@ export interface CustomStoreObjectEventMap {
   click: { originalEvent?: MouseEvent };
   dblclick: { originalEvent?: MouseEvent };
   hover: { originalEvent?: MouseEvent };
-  hoverend: { originalEvent?: MouseEvent };
+  hoverEnd: { originalEvent?: MouseEvent };
   update: {};
   select: {};
   deselect: {};

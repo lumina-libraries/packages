@@ -118,8 +118,9 @@ export interface PluginCore {
   registerExportFormat(config: ExportFormatConfig): void;
   getEnabledImportFormats(): ImportFormatConfig[];
   getEnabledExportFormats(): ExportFormatConfig[];
-  disableWindow(...windowTypes: EditorWindow[]): void;
-  enableWindow(windowType: EditorWindow): void;
+  /** Prefer api.disableWindow, which fills in the plugin id. A plugin's disables end when it unloads. */
+  disableWindow(windowType: EditorWindow, pluginId: string): void;
+  enableWindow(windowType: EditorWindow, pluginId: string): void;
   isWindowDisabled(windowType: EditorWindow): boolean;
   getDisabledWindows(): EditorWindow[];
   lockInspectorGroup(...groupNames: string[]): void;

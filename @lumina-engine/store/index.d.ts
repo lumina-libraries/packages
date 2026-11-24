@@ -35,10 +35,10 @@ export type StoreAsset =
   | CustomObject3D;
 
 export interface StoreEventMap {
-  add: [object: StoreAsset];
-  remove: [object: StoreAsset];
-  select: [object: StoreAsset | undefined];
-  deselect: [object: StoreAsset];
+  add: { object: StoreAsset };
+  remove: { object: StoreAsset };
+  select: { object: StoreAsset };
+  deselect: { object: StoreAsset };
 }
 
 export interface StoreAdapter {
@@ -61,9 +61,8 @@ export interface StoreAdapter {
   remove(object: StoreAsset): void;
   select(object?: StoreAsset): void;
   deselect(object: StoreAsset): void;
-  on<K extends keyof StoreEventMap>(eventName: K, listener: (...args: StoreEventMap[K]) => void): this;
-  once<K extends keyof StoreEventMap>(eventName: K, listener: (...args: StoreEventMap[K]) => void): this;
-  off<K extends keyof StoreEventMap>(eventName: K, listener: (...args: StoreEventMap[K]) => void): this;
+  addEventListener<K extends keyof StoreEventMap>(type: K, listener: (event: StoreEventMap[K] & { type: K }) => void): void;
+  removeEventListener<K extends keyof StoreEventMap>(type: K, listener: (event: StoreEventMap[K] & { type: K }) => void): void;
   findObjectByUuid(uuid: string): Object3D | undefined;
   findObjectByName(name: string): Object3D | undefined;
   findAllObjectsByName(name: string): Object3D[];

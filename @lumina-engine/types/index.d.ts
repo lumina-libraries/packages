@@ -5,6 +5,7 @@ import type { CustomObject3D } from "@lumina-engine/objects";
 import type StoreAdapter from "@lumina-engine/store";
 import type StoreFolderAdapter from "@lumina-engine/store-folders";
 import type { CustomStoreObject, CustomStoreObjectEventMap } from "@lumina-engine/store-objects";
+import type { EditorEvents } from "@lumina-engine/events";
 
 export type { ArrayCommand, Command, CommandType } from "@lumina-engine/commands";
 export type { EditorWindow, ExportFormatConfig, FeatureConfig, FeatureValidationResult, IframeWindowConfig, IframeWindowHandle, ImportFormatConfig, InspectorComponentConfig, InspectorGroupConfig, InspectorOptionConfig, PluginCore, PluginCoreMode, UIElementConfig } from "@lumina-engine/core";
@@ -64,12 +65,10 @@ export interface MenuItemConfig {
 }
 
 export interface ToolbarButtonConfig {
-  id?: string;
-  title: string;
-  icon?: string;
-  tooltip?: string;
-  onClick: () => void;
-  disabled?: boolean;
+  icon: string;
+  tooltip: string;
+  callback: () => void;
+  toolbar?: "main" | "secondary" | "bottom";
 }
 
 export interface ComponentInstance {
@@ -139,13 +138,6 @@ export interface PluginDirectoryHandle {
   getFile(name: string, create?: boolean): Promise<PluginFileHandle | null>;
 }
 
-export interface CommandEventData {
-  command: Command | ArrayCommand;
-  commandType: CommandType;
-  commandName: string;
-  action: "execute" | "undo" | "redo";
-}
-
 export interface IPluginAPI {
   init(name: string, description: string): Promise<void>;
   registerCustomObject(name: string, object: typeof CustomObject3D): void;
@@ -176,7 +168,10 @@ export interface IPluginAPI {
   registerExportFormat(formatId: string, config: ExporterConfig | ExportFormatConfig): void;
   addMenuItem(config: MenuItemConfig): void;
   addToolbarButton(config: ToolbarButtonConfig): void;
-  showNotification(message: string, type?: "info" | "success" | "warning" | "error", duration?: number): void;
+  /** Shows a message, tagged with the plugin name, in the devlog/terminal. */
+  showNotification(message: string, type?: "info" | "success" | "warning" | "error"): void;
+  /** The editor event bus scoped to this plugin; names come from EDITOR_EVENTS in @lumina-engine/events. */
+  readonly events: EditorEvents;
   registerComponent(name: string, source: string, metadata?: Record<string, unknown>): Promise<void>;
   createComponent(componentName: string, target: HTMLElement | string, props?: Record<string, unknown>): Promise<ComponentInstance>;
   updateComponent(instanceId: string, props: Record<string, unknown>): boolean;
@@ -214,7 +209,6 @@ export interface IPluginAPI {
   hasInspectorComponent(componentName: string): boolean;
   getInspectorComponentOptionValue(componentName: string, groupName: string, optionId: string | number): unknown | null;
   import(name: string, file?: Blob): Promise<unknown | undefined>;
-  onCommandEvent(eventType: "execute" | "undo" | "redo", callback: (data: CommandEventData) => void, commandTypeFilter?: CommandType | CommandType[]): () => void;
   createCanvasRenderer(options?: CanvasRendererOptions): unknown;
   generateThumbnail(object: Object3D, options?: ThumbnailGenerationOptions): Promise<Blob>;
   generateThumbnailDataURL(object: Object3D, options?: ThumbnailGenerationOptions): Promise<string>;
@@ -247,10 +241,6 @@ export interface IPluginAPI {
   executeCommand(command: Command | ArrayCommand | Record<string, unknown>): void;
   executeCommands(commands: Array<Command | ArrayCommand | Record<string, unknown>>): void;
   getAvailableCommandTypes(): string[];
-  onPointerEvent(eventType: "pointerenter" | "pointerleave" | "pointerdown" | "pointerup" | "pointermove" | "dblclick", callback: (data: unknown, object: Object3D | null) => void): () => void;
-  onKeyboardEvent(eventType: "keydown" | "keyup", callback: (data: unknown, object: Object3D | null) => void): () => void;
-  onSelectionChange(callback: (object: Object3D | null, previous: Object3D | null) => void): () => void;
-  clearGlobalEventWatchers(): void;
   openDirectory(id?: string, options?: { title?: string; message?: string }): Promise<PluginDirectoryHandle>;
   getDirectory(directory: PluginDirectoryHandle, name: string, create?: boolean): Promise<PluginDirectoryHandle | null>;
   getFile(directory: PluginDirectoryHandle, name: string, create?: boolean): Promise<PluginFileHandle | null>;
