@@ -41,7 +41,7 @@ export interface StoreEventMap {
   deselect: { object: StoreAsset };
 }
 
-export interface StoreAdapter {
+export interface ProjectStore {
   uuid: string;
   name: string;
   description: string;
@@ -84,5 +84,5 @@ export interface StoreAdapter {
   findAnimationOwners(animation: AnimationClip): Object3D[];
 }
 
-declare const defaultStore: StoreAdapter;
+declare const defaultStore: ProjectStore;
 export default defaultStore;

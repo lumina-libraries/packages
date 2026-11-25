@@ -1,5 +1,5 @@
 export type PluginCoreMode = "edit" | "view";
-export type EditorWindow = "script" | "scene" | "inspector" | "hierarchy" | "assets" | "uv" | "minimap" | "node" | "timeline" | "terminal" | "collider" | "package" | "git" | "iconGenerator" | "pluginManager" | "pluginExplorer" | "pluginEditor" | "moduleExplorer" | "pluginTerminal" | "pluginProperties" | "iframe";
+export type EditorWindow = "scene" | "inspector" | "hierarchy" | "assets" | "uv" | "minimap" | "script" | "node" | "timeline" | "terminal" | "collider" | "package" | "git" | "iconGenerator" | "pluginExplorer" | "pluginEditor" | "moduleExplorer" | "pluginTerminal" | "pluginProperties" | "iframe" | "myAssets" | "assetMarketplace" | "terrainEditor" | "voxelEditor";
 
 export interface FeatureConfig {
   id: string;

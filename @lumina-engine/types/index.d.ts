@@ -2,7 +2,7 @@ import type { BufferGeometry, Material, Object3D, Texture } from "three";
 import type { ArrayCommand, Command, CommandType } from "@lumina-engine/commands";
 import type { EditorWindow, ExportFormatConfig, FeatureConfig, FeatureValidationResult, IframeWindowConfig, IframeWindowHandle, ImportFormatConfig, InspectorComponentConfig, InspectorGroupConfig, InspectorOptionConfig, PluginCore, PluginCoreMode, UIElementConfig } from "@lumina-engine/core";
 import type { CustomObject3D } from "@lumina-engine/objects";
-import type StoreAdapter from "@lumina-engine/store";
+import type ProjectStore from "@lumina-engine/store";
 import type StoreFolderAdapter from "@lumina-engine/store-folders";
 import type { CustomStoreObject, CustomStoreObjectEventMap } from "@lumina-engine/store-objects";
 import type { EditorEvents } from "@lumina-engine/events";
@@ -40,7 +40,7 @@ export interface ExporterResult {
 }
 
 export type ImportHandler = (file: File) => Promise<ImporterResult | unknown>;
-export type ExportHandler = (store: StoreAdapter) => Promise<ExporterResult | unknown>;
+export type ExportHandler = (store: ProjectStore) => Promise<ExporterResult | unknown>;
 export interface ImporterConfig {
   extensions: string[];
   mimeTypes?: string[];
@@ -143,7 +143,7 @@ export interface IPluginAPI {
   registerCustomObject(name: string, object: typeof CustomObject3D): void;
   registerExporter(name: string, exporter: ExportHandler): void;
   registerImporter(name: string, handler: ImportHandler): void;
-  getStore(): StoreAdapter;
+  getStore(): ProjectStore;
   getPluginCore(): PluginCore;
   log(message: string, level?: "info" | "warn" | "error"): void;
   logInfo(message: string, context?: unknown): void;
