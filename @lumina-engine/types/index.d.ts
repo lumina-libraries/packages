@@ -57,6 +57,27 @@ export interface ExporterConfig {
   description?: string;
 }
 
+/** A command added to "Go to anything" (Ctrl+P) with registerPaletteCommand. */
+export interface PaletteCommandConfig {
+  id: string;
+  title: string;
+  icon?: string;
+  keywords?: string[];
+  category?: string;
+  /** true when it can run now, otherwise why not. */
+  when?: () => true | string;
+  run: () => void | Promise<void>;
+}
+
+/** What a reveal did (revealLocation). */
+export interface RevealResult {
+  path: string;
+  status: "revealed" | "unavailable" | "removed" | "timedOut" | "cancelled";
+  reason?: string;
+  gate?: string;
+  source?: string;
+}
+
 export interface MenuItemConfig {
   path: string;
   callback: () => void;
@@ -168,6 +189,13 @@ export interface IPluginAPI {
   registerExportFormat(formatId: string, config: ExporterConfig | ExportFormatConfig): void;
   addMenuItem(config: MenuItemConfig): void;
   addToolbarButton(config: ToolbarButtonConfig): void;
+  /** Adds a command to "Go to anything" (Ctrl+P); returns a function that removes it. Removed when the plugin unloads. */
+  registerPaletteCommand(config: PaletteCommandConfig): () => void;
+  unregisterPaletteCommand(id: string): void;
+  /** Opens "Go to anything", optionally with a query (">" lists actions). */
+  openPalette(query?: string): void;
+  /** Reveals a place of the editor UI by its location path (inspector/scene/lightmaps/bake). */
+  revealLocation(path: string, options?: { focus?: boolean }): Promise<RevealResult>;
   /** Shows a message, tagged with the plugin name, in the devlog/terminal. */
   showNotification(message: string, type?: "info" | "success" | "warning" | "error"): void;
   /** The editor event bus scoped to this plugin; names come from EDITOR_EVENTS in @lumina-engine/events. */

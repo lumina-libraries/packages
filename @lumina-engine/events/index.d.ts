@@ -66,6 +66,9 @@ export interface EditorEventMap {
   "workplace.opened": { directory: unknown; default: boolean; createdAt: Date; sessionId?: string; details?: { name: string; description: string } };
   "workplace.loaded": { projectId: string };
   "ui.refreshRequested": { section: "transform" | "material" | "texture" | "animation" | "folder" | "folders"; target: string };
+  "ui.revealRequested": { path: string; focus?: boolean; highlight?: boolean; source?: string };
+  "ui.revealed": { path: string; status: "revealed" | "unavailable" | "removed" | "timedOut" | "cancelled"; reason?: string; gate?: string; source?: string };
+  "palette.openRequested": { query?: string };
   "contextMenu.changed": { active?: boolean; x?: number; y?: number; items?: unknown[]; [option: string]: unknown };
   "assets.folderToggled": { folder: unknown | null; open: boolean };
   "inspector.componentsChanged": { object: CustomObject3D; removed: boolean };
@@ -103,6 +106,8 @@ export interface EditorEventMap {
   "plugin.customObjectUnregistered": { type: string };
   "plugin.menuItemAdded": { pluginId: string; pluginName: string; path: string; callback: () => void; icon?: string; shortcut?: string };
   "plugin.toolbarButtonAdded": { pluginId: string; pluginName: string; icon: string; tooltip: string; callback: () => void; toolbar?: "main" | "secondary" | "bottom" };
+  "plugin.paletteCommandAdded": { pluginId: string; pluginName: string; id: string; title: string; icon?: string; keywords?: string[]; category?: string; when?: () => true | string; run: () => void | Promise<void> };
+  "plugin.paletteCommandRemoved": { pluginId: string; id: string };
   "plugin.windowOpenRequested": { windowId: string; title: string; src: string; icon?: string; sandbox?: string; onMessage?: (data: unknown) => void; onLoad?: () => void; onClose?: () => void };
   "plugin.windowCloseRequested": { windowId: string };
   "plugin.windowDestroyed": { windowId: string };
