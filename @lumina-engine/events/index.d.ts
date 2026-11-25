@@ -49,8 +49,9 @@ export interface EditorEventMap {
   "devlog.logged": DevlogEntry;
   "selection.changed": Selection;
   "selection.renameRequested": { object: Object3D };
-  "project.saveRequested": Record<string, never>;
-  "project.stateChanged": { dirty: boolean; saving: boolean; location: string | null; lastSavedAt: Date | null };
+  "project.saveRequested": { done?: (saved: boolean) => void };
+  "project.stateChanged": { dirty: boolean; neverSaved: boolean; saving: boolean; location: string | null; lastSavedAt: Date | null };
+  "project.serializing": { active: boolean };
   "store.removeRequested": { object?: Object3D; material?: Material; geometry?: BufferGeometry; texture?: Texture; source?: Source<unknown>; animation?: AnimationClip; hierarchy?: boolean; [resource: string]: unknown };
   "import.requested": { object?: Object3D; material?: Material; texture?: Texture; animation?: AnimationClip; toCursor?: boolean; toCamera?: boolean; addTo?: Object3D; parent?: boolean; [resource: string]: unknown };
   "export.requested": { wavefront?: boolean; gltf?: boolean; zip?: boolean; fs?: boolean; nova?: boolean; asset?: boolean };
@@ -62,7 +63,8 @@ export interface EditorEventMap {
   "playTest.requested": ActiveState;
   "playTest.changed": ActiveState;
   "playTest.statusChanged": { phase: "idle" | "preparing" | "running" | "failed"; message?: string };
-  "workplace.opened": { directory: unknown; default: boolean; createdAt: Date; sessionId?: string };
+  "workplace.opened": { directory: unknown; default: boolean; createdAt: Date; sessionId?: string; details?: { name: string; description: string } };
+  "workplace.loaded": { projectId: string };
   "ui.refreshRequested": { section: "transform" | "material" | "texture" | "animation" | "folder" | "folders"; target: string };
   "contextMenu.changed": { active?: boolean; x?: number; y?: number; items?: unknown[]; [option: string]: unknown };
   "assets.folderToggled": { folder: unknown | null; open: boolean };
