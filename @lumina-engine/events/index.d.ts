@@ -76,9 +76,6 @@ export interface EditorEventMap {
   "workbench.voxelEditorRequested": { object: Object3D };
   "workbench.tabRequested": { templateId: string };
   "workbench.layoutResetRequested": Record<string, never>;
-  "gridTool.modeChanged": { enabled: boolean };
-  "gridTool.settingsRequested": { blockType: "ROOM" | "STAIRS" | "WALL" | "FLOOR"; rotation: 0 | 90 | 180 | 270; showConnectionPoints: boolean; mode: "Single" | "Line" | "Rectangle"; flip: boolean; showPreview: boolean; aboveSurface: boolean; onSurface: boolean; replaceBlocks: boolean; extrudeAmount: number };
-  "gridTool.settingsChanged": { blockType: "ROOM" | "STAIRS" | "WALL" | "FLOOR"; rotation: 0 | 90 | 180 | 270; showConnectionPoints: boolean; mode: "Single" | "Line" | "Rectangle"; flip: boolean; showPreview: boolean; aboveSurface: boolean; onSurface: boolean; replaceBlocks: boolean; extrudeAmount: number };
   "geometry.sessionChanged": { viewId: number; mesh: unknown | null; active: boolean };
   "geometry.toolStateChanged": { viewId: number; mode: "view" | "edit"; hasActiveSession: boolean };
   "geometry.toolSessionChanged": { viewId: number; toolKind: string | null; snapshot: unknown | null };
